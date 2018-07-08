@@ -27,7 +27,6 @@ RUN apk add --no-cache --virtual .build \
         ncurses \
         acl-dev \
         diffutils \
-        python-dev \
         python3-dev \
         lua${LUA_VERSION}-dev luajit-dev \
  && git -c advice.detachedHead=false \
@@ -36,7 +35,6 @@ RUN apk add --no-cache --virtual .build \
  && cd /usr/src/vim \
  && ./configure \
         --with-features=huge \
-        --enable-pythoninterp \
         --enable-python3interp \
         --enable-luainterp --with-luajit \
         --enable-fail-if-missing \
@@ -47,7 +45,6 @@ RUN apk add --no-cache --virtual .build \
  && apk del --purge .build \
 # test
  && vim -es \
-        -c 'verbose python import platform;print("Python v" + platform.python_version())' \
         -c 'verbose python3 import platform;print("Python3 v" + platform.python_version())' \
         -c 'verbose lua print(_VERSION)' \
         -c q
