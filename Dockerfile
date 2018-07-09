@@ -6,12 +6,14 @@ RUN apk update \
  && apk add \
     curl \
     git \
+    g++ \
+    libtool \
     neovim \
     the_silver_searcher \
     python3 \
     lua${LUA_VERSION} \
  && pip3 install neovim pipenv \
- && rm -rf /var/cache/apk/* \
+ && rm -rf /var/cache/apk/*
 
 ENV HOME /root
 WORKDIR $HOME
