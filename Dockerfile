@@ -11,6 +11,7 @@ RUN apk update \
     neovim \
     the_silver_searcher \
     python3 \
+    python3-dev \
     lua${LUA_VERSION} \
  && pip3 install neovim pipenv \
  && rm -rf /var/cache/apk/*
