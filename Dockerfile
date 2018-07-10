@@ -20,4 +20,4 @@ ENV HOME /root
 WORKDIR $HOME
 VOLUME $HOME
 
-ENTRYPOINT ["/usr/local/bin/nvim"]
+ENTRYPOINT ["/usr/bin/nvim"]
