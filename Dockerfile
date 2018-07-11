@@ -3,6 +3,14 @@ FROM alpine:3.7
 ARG LUA_VERSION="5.3"
 ARG GLOBAL_VER="6.6.2"
 
+ARG BUILD_DATE
+ARG VCS_REF
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.vcs-url="https://github.com/thawk/docker-neovim.git" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.schema-version="1.0.0-rc1"
+
 RUN apk add --no-cache \
     clang \
     clang-libs \
