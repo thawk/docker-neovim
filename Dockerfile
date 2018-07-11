@@ -1,7 +1,7 @@
 FROM alpine:3.7
 
 ARG LUA_VERSION="5.3"
-ARG GLOBAL_VER 6.6.2
+ARG GLOBAL_VER="6.6.2"
 
 RUN apk add --no-cache \
     clang \
