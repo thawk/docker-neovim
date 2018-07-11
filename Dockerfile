@@ -54,6 +54,5 @@ RUN apk add --no-cache \
  && apk del build-deps
 
 WORKDIR /src
-VOLUME /src
 
 ENTRYPOINT ["/usr/bin/nvim"]
