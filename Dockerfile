@@ -1,23 +1,51 @@
 FROM alpine:3.7
 
 ARG LUA_VERSION="5.3"
+ARG GLOBAL_VER 6.6.2
 
 RUN apk add --no-cache \
+    clang \
+    clang-libs \
+    ctags \
     curl \
     g++ \
     git \
     libtool \
-    lua${LUA_VERSION} \
+    make \
     neovim \
+    nodejs-npm \
     python3 \
-    python3-dev \
+    py3-pygments \
     the_silver_searcher \
+ && apk add --no-cache --virtual build-deps \
+    autoconf \
+    automake \
+    bison \
+    flex \
+    gperf \
+    ncurses-dev \
+    python3-dev \
+    texinfo \
  && pip3 install \
+    flake8 \
+    flake8-docstrings \
+    flake8-isort \
+    flake8-quotes \
+    jedi \
     neovim \
-    pipenv
+    pipenv \
+ && cd /tmp \
+ && curl -fSL http://tamacom.com/global/global-$GLOBAL_VER.tar.gz -o global-$GLOBAL_VER.tar.gz \
+ && tar xzf global-$GLOBAL_VER.tar.gz \
+ && cd global-$GLOBAL_VER \
+ && ./configure --with-exuberant-ctags=/usr/bin/ctags \
+ && make \
+ && make install \
+ && cp /usr/local/share/gtags/gtags.conf /etc/gtags.conf \
+ && rm -rf /tmp/global-$GLOBAL_VER /tmp/global-$GLOBAL_VER.tar.gz \
+ && apk del build-deps
 
-ENV HOME /root
-WORKDIR $HOME
-VOLUME $HOME
+WORKDIR /src
+VOLUME /src
 
 ENTRYPOINT ["/usr/bin/nvim"]
