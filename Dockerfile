@@ -4,15 +4,17 @@ ARG LUA_VERSION="5.3"
 
 RUN apk add --no-cache \
     curl \
-    git \
     g++ \
+    git \
     libtool \
+    lua${LUA_VERSION} \
     neovim \
-    the_silver_searcher \
     python3 \
     python3-dev \
-    lua${LUA_VERSION} \
- && pip3 install neovim pipenv
+    the_silver_searcher \
+ && pip3 install \
+    neovim \
+    pipenv
 
 ENV HOME /root
 WORKDIR $HOME
