@@ -21,6 +21,7 @@ RUN apk add --no-cache \
     libtool \
     make \
     neovim \
+    neovim-doc \
     nodejs-npm \
     python3 \
     py3-pygments \
