@@ -25,7 +25,7 @@ RUN apk add --no-cache \
     nodejs-npm \
     python3 \
     py3-pygments \
-    the_silver_searcher \
+    rg \
  && apk add --no-cache --virtual build-deps \
     autoconf \
     automake \
