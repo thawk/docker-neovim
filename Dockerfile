@@ -26,11 +26,14 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     neovim \
     git \
     subversion \
-    perf \
-    nodejs \
- && (curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo) \
- && yum install -y yarn \
- && pip2 install \
+    perf
+RUN (curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo) \
+ && yum install -y nodejs yarn
+
+RUN pip2 install --upgrade pip \
+ && pip3 install --upgrade pip
+
+RUN pip2 install \
     neovim \
     jedi \
     flake8 \
