@@ -69,4 +69,4 @@ RUN chmod a+x ${HOME}/run_nvim.sh
 ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
 WORKDIR /src
 
-ENTRYPOINT [/myhome/run_nvim.sh]
+ENTRYPOINT ["/myhome/run_nvim.sh"]
