@@ -61,7 +61,9 @@ RUN pip2 install \
  && pip3 install \
     pynvim
 
+RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
+
 ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
 WORKDIR /src
 
-ENTRYPOINT ["scl", "enable", "llvm-toolset-7", "nvim"]
+ENTRYPOINT ["scl", "enable", "llvm-toolset-7", "/usr/bin/nvim"]
