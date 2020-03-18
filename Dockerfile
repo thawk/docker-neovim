@@ -10,6 +10,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0.0-rc1"
 
 ENV HOME=/myhome
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 RUN mkdir -p $HOME
 
@@ -60,7 +62,6 @@ RUN true \
  && yum install -y nodejs yarn \
  && npm install -g \
     neovim \
-    fd-find \
  && true
 
 RUN true \
