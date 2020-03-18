@@ -64,4 +64,4 @@ RUN pip2 install \
 ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
 WORKDIR /src
 
-ENTRYPOINT ["scl", "enable", "llvm-toolset-7", "/root/squashfs-root/usr/bin/nvim"]
+ENTRYPOINT ["scl", "enable", "llvm-toolset-7", "nvim"]
