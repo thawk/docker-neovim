@@ -11,6 +11,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 ENV HOME=/myhome
 
+RUN mkdir -p $HOME
+
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
     centos-release-scl-rh \
  && yum install -y \
@@ -25,6 +27,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     cmake \
     gcc-c++ \
     gdb \
+    strace \
+    llvm-toolset-7-clang \
     llvm-toolset-7-clang-tools-extra \
     global \
     global-ctags \
@@ -33,12 +37,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     subversion \
     perf \
     man \
+    wget \
  && true
-
-RUN true \
- && (curl -sL https://rpm.nodesource.com/setup_10.x | bash -) \
- && (curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo) \
- && yum install -y nodejs yarn
 
 RUN pip2 install --upgrade pip \
  && pip3 install --upgrade pip
@@ -54,7 +54,16 @@ RUN pip2 install \
     pynvim
 
 RUN true \
- && mkdir -p $HOME \
+ && cd $HOME \
+ && (curl -sL https://rpm.nodesource.com/setup_10.x | bash -) \
+ && (curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo) \
+ && yum install -y nodejs yarn \
+ && npm install -g \
+    neovim \
+    fd-find \
+ && true
+
+RUN true \
  && cd $HOME \
  && (curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > nvim.appimage) \
  && chmod u+x nvim.appimage \
@@ -66,7 +75,7 @@ RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
 COPY run_nvim.sh ${HOME}
 RUN chmod a+x ${HOME}/run_nvim.sh
 
-ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
+ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin:${HOME}/node_modules/.bin"
 WORKDIR /src
 
 ENTRYPOINT ["/myhome/run_nvim.sh"]
