@@ -40,6 +40,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     perf \
     man \
     wget \
+    fuse-sshfs \
+    modprobe fuse \
  && true
 
 RUN pip2 install --upgrade pip \
@@ -68,8 +70,6 @@ RUN true \
  && cd $HOME \
  && (curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > nvim.appimage) \
  && chmod u+x nvim.appimage \
- && ./nvim.appimage --appimage-extract \
- && rm nvim.appimage \
  && true
 
 RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
