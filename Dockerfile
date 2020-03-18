@@ -40,14 +40,6 @@ RUN true \
  && (curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo) \
  && yum install -y nodejs yarn
 
-RUN true \
- && cd $HOME \
- && (curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > nvim.appimage) \
- && chmod u+x nvim.appimage \
- && ./nvim.appimage --appimage-extract \
- && rm nvim.appimage \
- && true
-
 RUN pip2 install --upgrade pip \
  && pip3 install --upgrade pip
 
@@ -60,6 +52,15 @@ RUN pip2 install \
     flake8-quotes \
  && pip3 install \
     pynvim
+
+RUN true \
+ && mkdir -p $HOME \
+ && cd $HOME \
+ && (curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > nvim.appimage) \
+ && chmod u+x nvim.appimage \
+ && ./nvim.appimage --appimage-extract \
+ && rm nvim.appimage \
+ && true
 
 RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
 COPY run_nvim.sh ${HOME}
