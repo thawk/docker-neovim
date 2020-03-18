@@ -9,7 +9,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0-rc1"
 
-ENV HOME=/root
+ENV HOME=/myhome
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
     centos-release-scl-rh \
@@ -63,8 +63,9 @@ RUN pip2 install \
 
 RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
 COPY run_nvim.sh ${HOME}
+RUN chmod a+x ${HOME}/run_nvim.sh
 
 ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
 WORKDIR /src
 
-ENTRYPOINT [${HOME}/run_nvim.sh]
+ENTRYPOINT [/myhome/run_nvim.sh]
