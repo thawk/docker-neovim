@@ -72,7 +72,8 @@ RUN true \
  && chmod u+x nvim.appimage \
  && true
 
-RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
+#RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
+RUN ln -s "${HOME}/nvim.apimage" /usr/bin/nvim
 COPY run_nvim.sh ${HOME}
 RUN chmod a+x ${HOME}/run_nvim.sh
 

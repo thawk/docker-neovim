@@ -3,4 +3,4 @@
 
 source scl_source enable llvm-toolset-7
 # $HOME/squashfs-root/usr/bin/nvim "$@"
-$HOME/nvim.appimage "$@"
+/usr/bin/nvim "$@"
