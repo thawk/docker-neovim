@@ -72,12 +72,13 @@ RUN true \
  && chmod u+x nvim.appimage \
  && true
 
-#RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
-RUN ln -s "${HOME}/nvim.apimage" /usr/bin/nvim
+# RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
+RUN ln -s "${HOME}/nvim.appimage" /usr/bin/nvim
 COPY run_nvim.sh ${HOME}
 RUN chmod a+x ${HOME}/run_nvim.sh
 
-ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin:${HOME}/node_modules/.bin"
+ENV PATH="${PATH}:${HOME}/node_modules/.bin"
+# ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
 WORKDIR /src
 
 ENTRYPOINT ["/myhome/run_nvim.sh"]
