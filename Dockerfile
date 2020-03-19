@@ -55,6 +55,7 @@ RUN pip2 install \
     flake8-isort \
     flake8-quotes \
  && pip3 install \
+    msgpack \
     pynvim
 
 RUN true \
