@@ -70,12 +70,16 @@ RUN true \
  && cd $HOME \
  && (curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > nvim.appimage) \
  && chmod u+x nvim.appimage \
+ && ./nvim.appimage --appimage-extract \
+ && rm nvim.appimage \
+ && find ./squashfs-root -type d | xargs chmod a+rx \
  && true
 
-# RUN ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin
-RUN ln -s "${HOME}/nvim.appimage" /usr/bin/nvim
 COPY run_nvim.sh ${HOME}
-RUN chmod a+x ${HOME}/run_nvim.sh
+RUN true \
+ && ln -s "${HOME}/squashfs-root/usr/bin/nvim" /usr/bin \
+ && chmod a+x ${HOME}/run_nvim.sh \
+ && true
 
 ENV PATH="${PATH}:${HOME}/node_modules/.bin"
 # ENV PATH="${PATH}:${HOME}/squashfs-root/usr/bin"
