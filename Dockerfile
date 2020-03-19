@@ -68,12 +68,13 @@ RUN true \
 
 RUN true \
  && cd $HOME \
+ && umask 0000 \
  && (curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > nvim.appimage) \
- && chmod u+x nvim.appimage \
+ && chmod a+x nvim.appimage \
  && ./nvim.appimage --appimage-extract \
  && rm nvim.appimage \
- && find ./squashfs-root -type d | xargs chmod a+rx \
  && true
+#&& find ./squashfs-root -type d | xargs chmod a+rx \
 
 COPY run_nvim.sh ${HOME}
 RUN true \
